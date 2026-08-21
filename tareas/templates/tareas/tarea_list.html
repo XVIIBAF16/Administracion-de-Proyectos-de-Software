@@ -1,0 +1,36 @@
+{% extends "tareas/base.html" %}
+{% block contenido %}
+    <a href="{% url 'crear_tarea' %}" class="btn btn-primary mb-3">+ Nueva tarea</a>
+
+    {% if tareas %}
+        <table class="table table-striped align-middle">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Estado</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tarea in tareas %}
+                <tr>
+                    <td>{{ tarea.titulo }}</td>
+                    <td>
+                        {% if tarea.completada %}
+                            <span class="badge bg-success">Completada</span>
+                        {% else %}
+                            <span class="badge bg-secondary">Pendiente</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-end">
+                        <a href="{% url 'editar_tarea' tarea.pk %}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                        <a href="{% url 'borrar_tarea' tarea.pk %}" class="btn btn-sm btn-outline-danger">Borrar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="text-muted">Todavía no hay tareas. ¡Crea la primera!</p>
+    {% endif %}
+{% endblock %}

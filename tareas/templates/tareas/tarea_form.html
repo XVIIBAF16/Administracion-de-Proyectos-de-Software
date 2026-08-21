@@ -1,0 +1,10 @@
+{% extends "tareas/base.html" %}
+{% block contenido %}
+    <h3>Guardar tarea</h3>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{% url 'lista_tareas' %}" class="btn btn-link">Cancelar</a>
+    </form>
+{% endblock %}
